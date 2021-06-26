@@ -27,39 +27,33 @@ module "vpc" {
   enable_nat_gateway = true
   enable_vpn_gateway = var.enable_vpn_gateway
 
-  tags = var.resource_tags
+  tags = var.project
 }
 
 module "app_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}"
+  name        = "web-sg-${var.project.name}-${var.project.environment}"
   description = "Security group for web-servers with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
 
-  tags = {
-    project     = "${var.resource_tags["project"]}",
-    environment = "${var.resource_tags["environment"]}"
-  }
+  tags = var.project
 }
 
 module "lb_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "lb-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}"
+  name        = "lb-sg-${var.project.name}-${var.project.environment}"
   description = "Security group for load balancer with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  tags = {
-    project     = "${var.resource_tags["project"]}",
-    environment = "${var.resource_tags["environment"]}"
-  }
+  tags = var.project
 }
 
 resource "random_string" "lb_id" {
@@ -72,7 +66,7 @@ module "elb_http" {
   version = "2.4.0"
 
   # Ensure load balancer name is unique
-  name = "lb-${random_string.lb_id.result}-${var.resource_tags["project"]}-${var.resource_tags["environment"]}"
+  name = "lb-${random_string.lb_id.result}-${var.project.name}-${var.project.environment}"
 
   internal = false
 
@@ -97,22 +91,16 @@ module "elb_http" {
     timeout             = 5
   }
 
-  tags = {
-    project     = "${var.resource_tags["project"]}",
-    environment = "${var.resource_tags["environment"]}"
-  }
+  tags = var.project
 }
 
 module "ec2_instances" {
   source = "./modules/aws-instance"
 
-  instance_count     = var.instance_count
-  instance_type      = var.ec2_instance_type
+  instance_count     = var.instances.count
+  instance_type      = var.instances.type
   subnet_ids         = module.vpc.private_subnets[*]
   security_group_ids = [module.app_security_group.this_security_group_id]
 
-  tags = {
-    project     = "${var.resource_tags["project"]}",
-    environment = "${var.resource_tags["environment"]}"
-  }
+  tags = var.project
 }

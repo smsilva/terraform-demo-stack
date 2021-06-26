@@ -1,13 +1,11 @@
-stack = {
-  version = "1.0.0"
-}
-
-resource_tags = {
-  project     = "demo-project",
+project = {
+  name        = "demo-project",
   environment = "sandbox",
+  version     = "v0.0.0"
   owner       = "me@example.com"
 }
 
-ec2_instance_type = "t2.nano"
-
-instance_count = 1
+instances = {
+  count = 1
+  type  = "t2.nano"
+}
