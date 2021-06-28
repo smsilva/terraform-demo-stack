@@ -6,6 +6,15 @@ terraform {
   }
 }
 
+locals {
+  tags = {
+    project     = var.project.name
+    owner       = var.project.owner
+    environment = var.environment.name
+    version     = var.environment.version
+  }
+}
+
 provider "aws" {
   region = var.aws_region
 }
@@ -27,33 +36,33 @@ module "vpc" {
   enable_nat_gateway = true
   enable_vpn_gateway = var.enable_vpn_gateway
 
-  tags = var.project
+  tags = local.tags
 }
 
 module "app_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "web-sg-${var.project.name}-${var.project.environment}"
+  name        = "web-sg-${var.project.name}-${var.environment.name}"
   description = "Security group for web-servers with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
 
-  tags = var.project
+  tags = local.tags
 }
 
 module "lb_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "lb-sg-${var.project.name}-${var.project.environment}"
+  name        = "lb-sg-${var.project.name}-${var.environment.name}"
   description = "Security group for load balancer with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  tags = var.project
+  tags = local.tags
 }
 
 resource "random_string" "lb_id" {
@@ -66,7 +75,7 @@ module "elb_http" {
   version = "2.4.0"
 
   # Ensure load balancer name is unique
-  name = "lb-${random_string.lb_id.result}-${var.project.name}-${var.project.environment}"
+  name = "lb-${random_string.lb_id.result}-${var.project.name}-${var.environment.name}"
 
   internal = false
 
@@ -91,7 +100,7 @@ module "elb_http" {
     timeout             = 5
   }
 
-  tags = var.project
+  tags = local.tags
 }
 
 module "ec2_instances" {
@@ -102,5 +111,5 @@ module "ec2_instances" {
   subnet_ids         = module.vpc.private_subnets[*]
   security_group_ids = [module.app_security_group.this_security_group_id]
 
-  tags = var.project
+  tags = local.tags
 }
