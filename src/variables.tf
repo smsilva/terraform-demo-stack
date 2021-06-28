@@ -2,8 +2,8 @@ variable "project" {
   description = "Project Properties"
   type        = map(string)
   default = {
-    name    = "my-project",
-    owner   = "me@example.com"
+    name    = "demo",
+    owner   = "smsilva@gmail.com"
   }
 }
 
@@ -11,10 +11,11 @@ variable "environment" {
   description = "Environment Properties"
   type        = map(string)
   default = {
-    name    = "dev",
+    name    = "local",
     version = "v0.0.0"
   }
 }
+
 variable "aws_region" {
   description = "AWS region"
   type        = string
