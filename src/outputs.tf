@@ -3,7 +3,18 @@ output "public_dns_name" {
   value       = module.elb_http.this_elb_dns_name
 }
 
+output "project" {
+  description = "Project and Environment Informations"
+  value = {
+    name    = var.project.name
+    version = var.environment.version
+  }
+}
+
 output "environment" {
   description = "Project and Environment Informations"
-  value       = "${var.project.name}-${var.environment.name}-${var.environment.version}"
+  value = {
+    id      = "${var.project.name}-${var.environment.name}-${var.environment.version}"
+    name    = var.environment.name
+  }
 }
