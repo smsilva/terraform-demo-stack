@@ -5,10 +5,5 @@ output "public_dns_name" {
 
 output "environment" {
   description = "Project and Environment Informations"
-  value = {
-    project     = var.project.name
-    owner       = var.project.owner
-    environment = var.environment.name
-    version     = var.environment.version
-  }
+  value       = "${var.project.name}-${var.environment.name}-${var.environment.version}"
 }
