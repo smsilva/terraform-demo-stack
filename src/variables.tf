@@ -12,7 +12,7 @@ variable "environment" {
   type        = map(string)
   default = {
     name    = "local",
-    version = "v0.0.0"
+    version = "latest"
   }
 }
 
