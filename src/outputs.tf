@@ -14,7 +14,12 @@ output "project" {
 output "environment" {
   description = "Project and Environment Informations"
   value = {
-    id      = "${var.project.name}-${var.environment.name}-${var.environment.version}"
-    name    = var.environment.name
+    id     = "${var.project.name}-${var.environment.name}-${var.environment.version}"
+    name   = var.environment.name
+    region = var.aws_region
+    instances = {
+      count = var.instances.count
+      type  = var.instances.type
+    }
   }
 }
