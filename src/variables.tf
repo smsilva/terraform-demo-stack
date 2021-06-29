@@ -18,7 +18,10 @@ variable "environment" {
 
 variable "countries" {
   type    = list(string)
-  default = ["Rio de Janeiro","Belo Horizonte"]
+  default = [
+    "Rio de Janeiro",
+    "Belo Horizonte"
+  ]
 }
 
 variable "aws_region" {
