@@ -7,9 +7,5 @@ terraform {
 }
 
 inputs = {
-  something = "Stack"
-}
-
-dependencies {
-  paths = ["../null-resource"]
+  something = "Egypt"
 }

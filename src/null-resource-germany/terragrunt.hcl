@@ -7,5 +7,5 @@ terraform {
 }
 
 inputs = {
-  something = "Athens"
+  something = "Germany"
 }
