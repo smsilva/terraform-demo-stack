@@ -113,3 +113,14 @@ module "ec2_instances" {
 
   tags = local.tags
 }
+
+variable "countries" {
+  default = ["Athens","Berlin"]
+}
+
+module "null-resource" {
+  source = "./modules/null-resource"
+
+  for_each  = toset(var.countries)
+  something = each.key
+}
