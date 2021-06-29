@@ -1,5 +1,6 @@
 module "null-resource" {
   source = "git::github.com/smsilva/infrastructure-modules.git//null-resource?ref=master"
 
-  something = var.something
+  for_each = toset(var.countries)
+  something = each.key
 }

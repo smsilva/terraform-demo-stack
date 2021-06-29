@@ -1,3 +1,3 @@
-variable "something" {
-  default = "none"
+variable "countries" {
+  default = ["Athens","Berlin"]
 }
