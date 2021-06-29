@@ -2,8 +2,8 @@ variable "project" {
   description = "Project Properties"
   type        = map(string)
   default = {
-    name    = "demo",
-    owner   = "smsilva@gmail.com"
+    name  = "demo",
+    owner = "smsilva@gmail.com"
   }
 }
 
@@ -11,84 +11,50 @@ variable "environment" {
   description = "Environment Properties"
   type        = map(string)
   default = {
-    name    = "local",
+    name    = "local"
     version = "latest"
+    region  = "us-east-1"
   }
 }
 
-variable "countries" {
-  type    = list(string)
-  default = [
-    "Rio de Janeiro",
-    "Belo Horizonte"
-  ]
+variable "cidr" {
+  default = "10.240.0.0/16"
 }
 
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-west-2"
-}
-
-variable "vpc_cidr_block" {
-  description = "CIDR block for VPC"
-  type        = string
-  default     = "10.0.0.0/16"
-}
-
-variable "instances" {
-  description = "Instance Properties"
-  type        = map(string)
-  default = {
-    count = 1,
-    type  = "t2.nano"
-  }
-}
-
-variable "enable_vpn_gateway" {
-  description = "Enable a VPN gateway in your VPC."
-  type        = bool
-  default     = false
-}
-
-variable "public_subnet_count" {
-  description = "Number of public subnets."
-  type        = number
-  default     = 2
+variable "vpn_gateway" {
+  default = false
 }
 
 variable "private_subnet_count" {
-  description = "Number of private subnets."
-  type        = number
-  default     = 2
-}
-
-variable "public_subnet_cidr_blocks" {
-  description = "Available cidr blocks for public subnets."
-  type        = list(string)
-  default = [
-    "10.0.1.0/24",
-    "10.0.2.0/24",
-    "10.0.3.0/24",
-    "10.0.4.0/24",
-    "10.0.5.0/24",
-    "10.0.6.0/24",
-    "10.0.7.0/24",
-    "10.0.8.0/24",
-  ]
+  default = 1
 }
 
 variable "private_subnet_cidr_blocks" {
-  description = "Available cidr blocks for private subnets."
-  type        = list(string)
   default = [
-    "10.0.101.0/24",
-    "10.0.102.0/24",
-    "10.0.103.0/24",
-    "10.0.104.0/24",
-    "10.0.105.0/24",
-    "10.0.106.0/24",
-    "10.0.107.0/24",
-    "10.0.108.0/24",
+    "10.240.1.0/24",
+    "10.240.2.0/24",
+    "10.240.3.0/24",
+    "10.240.4.0/24",
+    "10.240.5.0/24",
+    "10.240.6.0/24",
+    "10.240.7.0/24",
+    "10.240.8.0/24",
+  ]
+}
+
+variable "public_subnet_count" {
+  default = 1
+}
+
+variable "public_subnet_cidr_blocks" {
+  default = [
+    "10.240.101.0/24",
+    "10.240.102.0/24",
+    "10.240.103.0/24",
+    "10.240.104.0/24",
+    "10.240.105.0/24",
+    "10.240.106.0/24",
+    "10.240.107.0/24",
+    "10.240.108.0/24",
   ]
 }

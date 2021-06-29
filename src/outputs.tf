@@ -1,10 +1,5 @@
-output "public_dns_name" {
-  description = "Public DNS names of the load balancer for this project"
-  value       = module.elb_http.this_elb_dns_name
-}
-
 output "project" {
-  description = "Project and Environment Informations"
+  description = "Project Information"
   value = {
     name    = var.project.name
     version = var.environment.version
@@ -12,14 +7,18 @@ output "project" {
 }
 
 output "environment" {
-  description = "Project and Environment Informations"
+  description = "Environment Information"
   value = {
-    id     = "${var.project.name}-${var.environment.name}-${var.environment.version}"
+    id     = "${var.project.name}-${var.environment.name}-${var.environment.version}-${module.environment_id.id}"
     name   = var.environment.name
-    region = var.aws_region
-    instances = {
-      count = var.instances.count
-      type  = var.instances.type
-    }
+    region = var.environment.region
+  }
+}
+
+output "vpc" {
+  value = {
+    id                  = module.network.vpc.id
+    name                = module.network.vpc.name
+    ingress_cidr_blocks = module.network.vpc.public_subnets_cidr_blocks
   }
 }
