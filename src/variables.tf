@@ -16,6 +16,11 @@ variable "environment" {
   }
 }
 
+variable "countries" {
+  type    = list(string)
+  default = ["Rio de Janeiro","Belo Horizonte"]
+}
+
 variable "aws_region" {
   description = "AWS region"
   type        = string

@@ -116,4 +116,6 @@ module "ec2_instances" {
 
 module "null-resource-countries" {
   source = "./modules/null-resource"
+
+  countries = var.countries
 }
