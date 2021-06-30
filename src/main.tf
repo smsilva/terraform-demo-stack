@@ -5,6 +5,7 @@ locals {
     environment = var.environment.name
     version     = var.environment.version
   }
+  prefix = var.project.name
 }
 
 module "environment_id" {
@@ -14,8 +15,8 @@ module "environment_id" {
 module "network" {
   source = "./modules/aws-network"
 
+  prefix                     = local.prefix
   region                     = var.environment.region
-  prefix                     = "${var.project.name}"
   cidr                       = var.cidr
   private_subnet_count       = var.private_subnet_count
   private_subnet_cidr_blocks = var.private_subnet_cidr_blocks
