@@ -12,7 +12,7 @@ locals {
 module "environment_id" {
   source = "./modules/random-string"
 
-  length = 4
+  length = 5
 }
 
 module "network" {
