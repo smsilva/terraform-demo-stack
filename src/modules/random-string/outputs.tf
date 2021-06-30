@@ -1,3 +1,3 @@
 output "id" {
-  value = random_string.environment_random_id.result
+  value = "${random_string.default.result}"
 }

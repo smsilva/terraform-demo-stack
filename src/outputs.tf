@@ -22,3 +22,10 @@ output "vpc" {
     ingress_cidr_blocks = module.network.vpc.public_subnets_cidr_blocks
   }
 }
+
+output "securit_groups" {
+  value = {
+    app = module.network.app_security_group
+    lb  = module.network.lb_security_group
+  }
+}

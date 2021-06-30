@@ -1,4 +1,4 @@
-resource "random_string" "environment_random_id" {
+resource "random_string" "default" {
   length  = var.length
   special = false
 }
