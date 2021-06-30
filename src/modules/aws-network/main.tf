@@ -18,7 +18,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.2.0"
 
-  name = var.name
+  name = "${var.prefix}-vpc"
   cidr = var.cidr
 
   azs             = data.aws_availability_zones.available.names
@@ -29,4 +29,15 @@ module "vpc" {
   enable_vpn_gateway = var.vpn_gateway
 
   tags = var.tags
+}
+
+module "app_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/web"
+  version = "4.3.0"
+
+  name                = "${var.prefix}-web-sg"
+  description         = "Security group for web-servers with HTTP ports open within VPC"
+  vpc_id              = module.vpc.vpc_id
+  ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
+  tags                = var.tags
 }

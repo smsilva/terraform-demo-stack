@@ -15,7 +15,7 @@ module "network" {
   source = "./modules/aws-network"
 
   region                     = var.environment.region
-  name                       = "${var.project.name}-vpc"
+  prefix                     = "${var.project.name}"
   cidr                       = var.cidr
   private_subnet_count       = var.private_subnet_count
   private_subnet_cidr_blocks = var.private_subnet_cidr_blocks
@@ -23,14 +23,3 @@ module "network" {
   public_subnet_cidr_blocks  = var.public_subnet_cidr_blocks
   tags                       = local.tags
 }
-
-# module "app_security_group" {
-#   source  = "terraform-aws-modules/security-group/aws//modules/web"
-#   version = "4.3.0"
-
-#   name                = "web-sg-${var.project.name}-${var.environment.name}"
-#   description         = "Security group for web-servers with HTTP ports open within VPC"
-#   vpc_id              = module.network.vpc.id
-#   ingress_cidr_blocks = module.network.vpc.public_subnets_cidr_blocks
-#   tags                = local.tags
-# }

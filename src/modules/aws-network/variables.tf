@@ -6,8 +6,8 @@ variable "region" {
   default = "us-west-1"
 }
 
-variable "name" {
-  default = "my-vpc"
+variable "prefix" {
+  default = "my-prefix"
 }
 
 variable "cidr" {
