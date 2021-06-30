@@ -1,11 +1,12 @@
 locals {
+  prefix = var.project.name
+
   tags = {
     project     = var.project.name
     owner       = var.project.owner
     environment = var.environment.name
     version     = var.environment.version
   }
-  prefix = var.project.name
 }
 
 module "environment_id" {
