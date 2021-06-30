@@ -1,4 +1,4 @@
 resource "random_string" "environment_random_id" {
-  length  = 3
+  length  = var.length
   special = false
 }

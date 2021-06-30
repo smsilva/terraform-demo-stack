@@ -35,9 +35,20 @@ module "app_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "4.3.0"
 
-  name                = "${var.prefix}-web-sg"
+  name                = "${var.prefix}-sg-web"
   description         = "Security group for web-servers with HTTP ports open within VPC"
   vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
+  tags                = var.tags
+}
+
+module "lb_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/web"
+  version = "4.3.0"
+
+  name                = "${var.prefix}-sg-lb"
+  description         = "Security group for load balancer with HTTP ports open within VPC"
+  vpc_id              = module.vpc.vpc_id
+  ingress_cidr_blocks = ["0.0.0.0/0"]
   tags                = var.tags
 }

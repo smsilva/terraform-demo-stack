@@ -11,6 +11,8 @@ locals {
 
 module "environment_id" {
   source = "./modules/random-string"
+
+  length = 4
 }
 
 module "network" {
