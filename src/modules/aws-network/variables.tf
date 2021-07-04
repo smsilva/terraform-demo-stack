@@ -14,12 +14,16 @@ variable "cidr" {
   default = "10.0.0.0/16"
 }
 
+variable "nat_gateway" {
+  default = false
+}
+
 variable "vpn_gateway" {
   default = false
 }
 
 variable "private_subnet_count" {
-  default = 2
+  default = 1
 }
 
 variable "private_subnet_cidr_blocks" {
@@ -36,7 +40,7 @@ variable "private_subnet_cidr_blocks" {
 }
 
 variable "public_subnet_count" {
-  default = 2
+  default = 1
 }
 
 variable "public_subnet_cidr_blocks" {
