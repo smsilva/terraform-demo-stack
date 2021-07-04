@@ -33,7 +33,7 @@ variable "vpn_gateway" {
 }
 
 variable "private_subnet_count" {
-  default = 2
+  default = 1
 }
 
 variable "public_subnet_count" {
