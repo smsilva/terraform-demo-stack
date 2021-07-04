@@ -1,5 +1,5 @@
 locals {
-  prefix = var.project.name
+  prefix = "${var.project.name}-${var.environment.name}"
 
   tags = {
     project     = var.project.name

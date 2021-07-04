@@ -1,10 +1,12 @@
 output "vpc" {
   value = {
-    id                         = module.vpc.vpc_id
-    name                       = module.vpc.name
-    public_subnets_cidr_blocks = module.vpc.public_subnets_cidr_blocks
-    private_subnets            = module.vpc.private_subnets[*]
-    security_group_ids         = [module.app_security_group.security_group_id]
+    id                          = module.vpc.vpc_id
+    name                        = module.vpc.name
+    private_subnets             = module.vpc.private_subnets[*]
+    private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+    public_subnets              = module.vpc.public_subnets[*]
+    public_subnets_cidr_blocks  = module.vpc.public_subnets_cidr_blocks
+    security_group_ids          = [module.app_security_group.security_group_id]
   }
 }
 

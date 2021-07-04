@@ -33,6 +33,10 @@ variable "vpn_gateway" {
 }
 
 variable "private_subnet_count" {
+  default = 2
+}
+
+variable "public_subnet_count" {
   default = 1
 }
 
@@ -47,10 +51,6 @@ variable "private_subnet_cidr_blocks" {
     "10.0.7.0/24",
     "10.0.8.0/24",
   ]
-}
-
-variable "public_subnet_count" {
-  default = 1
 }
 
 variable "public_subnet_cidr_blocks" {

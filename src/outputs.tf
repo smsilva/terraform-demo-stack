@@ -17,9 +17,10 @@ output "environment" {
 
 output "vpc" {
   value = {
-    id                  = module.network.vpc.id
-    name                = module.network.vpc.name
-    ingress_cidr_blocks = module.network.vpc.public_subnets_cidr_blocks
+    id                          = module.network.vpc.id
+    name                        = module.network.vpc.name
+    private_subnets_cidr_blocks = module.network.vpc.private_subnets_cidr_blocks
+    public_subnets_cidr_blocks  = module.network.vpc.public_subnets_cidr_blocks
   }
 }
 
