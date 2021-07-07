@@ -1,15 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
 resource "random_string" "lb_id" {
   length  = 3
   special = false
