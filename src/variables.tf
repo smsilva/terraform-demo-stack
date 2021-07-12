@@ -21,7 +21,7 @@ variable "instances" {
   type = map(string)
   default = {
     count = "3"
-    type  = "t2.nano"
+    type  = "t3.nano"
   }
 }
 
