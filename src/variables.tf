@@ -20,7 +20,7 @@ variable "environment" {
 variable "instances" {
   type = map(string)
   default = {
-    count = "3"
+    count = "2"
     type  = "t3.nano"
   }
 }
